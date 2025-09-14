@@ -7,10 +7,10 @@ import (
 
 var Debug = true
 
-func Catch(fn func(err any)) {
-	err := recover()
+func Catch(fn func(any)) {
+	e := recover()
 	if fn != nil {
-		fn(err)
+		fn(e)
 	}
 }
 
@@ -41,6 +41,29 @@ func Ok(w any, s any, d ...any) {
 	}
 }
 
+type Assertion struct {
+	Message string
+}
+
+func (a Assertion) Error() string {
+	return a.Message
+}
+
+func NewAssertion(msg string) Assertion {
+	return Assertion{}
+}
+
+func T(c bool, err error) {
+	if Debug {
+		log.Printf("assert:T(%t, %T)", c, err)
+	}
+	if c {
+		return
+	}
+
+	panic(err)
+}
+
 func True(c bool, s any, d ...any) {
 	var m string
 
@@ -48,6 +71,7 @@ func True(c bool, s any, d ...any) {
 	case string:
 		m = fmt.Sprintf(s.(string), d...)
 	default:
+		m = fmt.Sprintf("%T", s)
 	}
 
 	if c {
@@ -58,5 +82,5 @@ func True(c bool, s any, d ...any) {
 	}
 
 	log.Printf("%T", m)
-	panic(m)
+	panic(NewAssertion(m))
 }
