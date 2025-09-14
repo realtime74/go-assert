@@ -28,6 +28,8 @@ func Z(w any, s any, d ...any) {
 		True(w == false, s, d...)
 	case int:
 		True(w == 0, s, d...)
+	case nil:
+		return
 	default:
 		True(false, "unknown type of %T", w)
 	}
