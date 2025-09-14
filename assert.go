@@ -67,7 +67,6 @@ func T(c bool, err error) {
 
 func True(c bool, s any, d ...any) {
 	var m string
-	log.Fatal()
 
 	switch s.(type) {
 	case string:
