@@ -13,7 +13,7 @@ func Catch(fn func(any)) {
 		return
 	}
 
-	log.Printf("assert.Catch(%T, %T)", e, fn)
+	log.Printf("assert.Catch(%s, %T)", e, fn)
 	if fn != nil {
 		fn(e)
 	}
