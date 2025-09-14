@@ -114,13 +114,3 @@ func try_something() {
 	do_bad()
 
 }
-
-func __main() {
-	catch_bad()
-	try_something()
-	var x *string = nil
-	True(5 == 5, "good check %d", 5)
-	asserte(x, "xnil")
-	asserte(blablue(), "sfasd")
-	True(3 == 5, "bad heck %d", 3)
-}
