@@ -9,6 +9,10 @@ var Debug = true
 
 func Catch(fn func(any)) {
 	e := recover()
+	if e == nil {
+		return
+	}
+
 	log.Printf("assert.Catch(%T)", e)
 	if fn != nil {
 		fn(e)
